@@ -31,6 +31,24 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
 });
+const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const payload = req.body;
+        const data = yield user_services_1.default.loginServices(payload);
+        res.json({
+            status: true,
+            message: 'User login successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'User is not login successfully',
+            error,
+        });
+    }
+});
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
@@ -109,5 +127,6 @@ const userControllar = {
     deleteUser,
     getSingleUser,
     getUser,
+    loginUser,
 };
 exports.default = userControllar;

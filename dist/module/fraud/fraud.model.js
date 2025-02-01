@@ -35,7 +35,11 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const ScamReportSchema = new mongoose_1.Schema({
-    user: { type: mongoose_1.Schema.Types.ObjectId, ref: 'users', required: true },
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Users',
+    },
     fraudType: {
         type: mongoose_1.default.Schema.Types.Mixed,
         required: true,

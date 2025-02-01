@@ -86,6 +86,24 @@ const getSingleFraud = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
+const getFraudbyType = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { fraudType } = req.params;
+        const data = yield fraud_services_1.default.getFraudByTypeIntoDB(fraudType);
+        res.json({
+            status: true,
+            message: 'Fraud get successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Fraud is not get successfully',
+            error,
+        });
+    }
+});
 const getFraud = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield fraud_services_1.default.getFraudIntoDB();
@@ -109,5 +127,6 @@ const FraudControllar = {
     deleteFraud,
     getSingleFraud,
     getFraud,
+    getFraudbyType,
 };
 exports.default = FraudControllar;

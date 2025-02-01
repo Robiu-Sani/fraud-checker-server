@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = __importDefault(require("./user.model"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const createUsersIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.create(payload);
     return result;
@@ -33,11 +34,39 @@ const deleteSingleUserByIdIntoDB = (id) => __awaiter(void 0, void 0, void 0, fun
     const result = yield user_model_1.default.findByIdAndDelete(id);
     return result;
 });
+const loginServices = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let user;
+        if (payload.email) {
+            user = yield user_model_1.default.findOne({ email: payload.email });
+        }
+        else if (payload.number) {
+            user = yield user_model_1.default.findOne({ number: payload.number });
+        }
+        if (!user) {
+            return {
+                status: false,
+                message: 'No user found with this email or number.',
+            };
+        }
+        const isPasswordValid = yield bcryptjs_1.default.compare(payload.password, user.password);
+        if (!isPasswordValid) {
+            return { status: false, message: 'Incorrect password.' };
+        }
+        const userInfo = Object.assign(Object.assign({}, user.toObject()), { password: undefined });
+        return { status: true, message: 'Login successful', data: userInfo };
+    }
+    catch (error) {
+        console.error('Error during login:', error);
+        return { status: false, message: 'Something went wrong.' };
+    }
+});
 const userServices = {
     createUsersIntoDB,
     updateUserIntoDB,
     getUserIntoDB,
     getSingleUserByIdIntoDB,
     deleteSingleUserByIdIntoDB,
+    loginServices,
 };
 exports.default = userServices;

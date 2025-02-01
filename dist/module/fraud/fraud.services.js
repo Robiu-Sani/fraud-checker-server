@@ -22,11 +22,15 @@ const updateFraudIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, functi
     return result;
 });
 const getFraudIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield fraud_model_1.default.find().populate('Users');
+    const result = yield fraud_model_1.default.find().populate('user');
     return result;
 });
 const getSingleFraudByIdIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield fraud_model_1.default.findById(id).populate('Users');
+    const result = yield fraud_model_1.default.findById(id).populate('user');
+    return result;
+});
+const getFraudByTypeIntoDB = (fraudType) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield fraud_model_1.default.find({ fraudType: fraudType }).populate('user');
     return result;
 });
 const deleteSingleFraudByIdIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,5 +43,6 @@ const ScamReportervices = {
     getFraudIntoDB,
     getSingleFraudByIdIntoDB,
     deleteSingleFraudByIdIntoDB,
+    getFraudByTypeIntoDB,
 };
 exports.default = ScamReportervices;

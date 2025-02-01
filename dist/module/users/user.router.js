@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const user_controllar_1 = __importDefault(require("./user.controllar"));
 const router = express_1.default.Router();
 router.post('/create', user_controllar_1.default.createUser);
+router.post('/login', user_controllar_1.default.loginUser);
 router.get('/', user_controllar_1.default.getUser);
 router.get('/single-user/:id', user_controllar_1.default.getSingleUser);
 router.patch('/update-user-byPatch/:id', user_controllar_1.default.updateUser);

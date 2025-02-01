@@ -25,6 +25,13 @@ const getSingleFraudByIdIntoDB = async (id: string | number) => {
   return result;
 };
 
+const getFraudByTypeIntoDB = async (fraudType: string) => {
+  const result = await ScamReport.find({ fraudType: fraudType }).populate(
+    'user',
+  );
+  return result;
+};
+
 const deleteSingleFraudByIdIntoDB = async (id: string | number) => {
   const result = await ScamReport.findByIdAndDelete(id);
   return result;
@@ -36,5 +43,6 @@ const ScamReportervices = {
   getFraudIntoDB,
   getSingleFraudByIdIntoDB,
   deleteSingleFraudByIdIntoDB,
+  getFraudByTypeIntoDB,
 };
 export default ScamReportervices;

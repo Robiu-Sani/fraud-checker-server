@@ -74,6 +74,24 @@ const getSingleFraud = async (req: Request, res: Response) => {
   }
 };
 
+const getFraudbyType = async (req: Request, res: Response) => {
+  try {
+    const { fraudType } = req.params;
+    const data = await ScamReportervices.getFraudByTypeIntoDB(fraudType);
+    res.json({
+      status: true,
+      message: 'Fraud get successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Fraud is not get successfully',
+      error,
+    });
+  }
+};
+
 const getFraud = async (req: Request, res: Response) => {
   try {
     const data = await ScamReportervices.getFraudIntoDB();
@@ -97,6 +115,7 @@ const FraudControllar = {
   deleteFraud,
   getSingleFraud,
   getFraud,
+  getFraudbyType,
 };
 
 export default FraudControllar;
