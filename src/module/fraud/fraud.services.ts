@@ -16,12 +16,12 @@ const updateFraudIntoDB = async (id: string | number, info: object) => {
 };
 
 const getFraudIntoDB = async () => {
-  const result = await ScamReport.find().populate('Users');
+  const result = await ScamReport.find().populate('user');
   return result;
 };
 
 const getSingleFraudByIdIntoDB = async (id: string | number) => {
-  const result = await ScamReport.findById(id).populate('Users');
+  const result = await ScamReport.findById(id).populate('user');
   return result;
 };
 

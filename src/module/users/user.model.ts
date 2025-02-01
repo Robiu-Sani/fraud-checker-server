@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs'; // Import bcrypt
 import { UserInterface } from './user.interface';
 
 const userSchema = new mongoose.Schema<UserInterface>(
@@ -39,6 +40,25 @@ const userSchema = new mongoose.Schema<UserInterface>(
   },
 );
 
-const Users = mongoose.model<UserInterface>('users', userSchema);
+userSchema.pre('save', async function (next) {
+  const errorHandler = (error: mongoose.CallbackError) => {
+    next(error);
+  };
+
+  if (this.isModified('password')) {
+    try {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(this.password, salt);
+      this.password = hashedPassword;
+      next();
+    } catch (error) {
+      errorHandler(error as mongoose.CallbackError);
+    }
+  } else {
+    next();
+  }
+});
+
+const Users = mongoose.model<UserInterface>('Users', userSchema);
 
 export default Users;

@@ -6,3 +6,4 @@ get = https://fraud-checker-server-umber.vercel.app/api/v1/user/single-user/:id
 patch = https://fraud-checker-server-umber.vercel.app/api/v1/user/update-user-byPatch/:id
 put = https://fraud-checker-server-umber.vercel.app/api/v1/user/update-user-byPut/:id
 delete = https://fraud-checker-server-umber.vercel.app/api/v1/user/delete/:id
+

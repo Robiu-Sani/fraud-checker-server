@@ -3,7 +3,11 @@ import { ScamReportInterface } from './fraud.interface';
 
 const ScamReportSchema = new Schema<ScamReportInterface>(
   {
-    user: { type: Schema.Types.ObjectId, ref: 'users', required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Users',
+    },
     fraudType: {
       type: mongoose.Schema.Types.Mixed,
       required: true,
