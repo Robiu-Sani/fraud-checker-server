@@ -19,6 +19,24 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+const loginUser = async (req: Request, res: Response) => {
+  try {
+    const payload = req.body;
+    const data = await userServices.loginServices(payload);
+    res.json({
+      status: true,
+      message: 'User login successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'User is not login successfully',
+      error,
+    });
+  }
+};
+
 const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -97,6 +115,7 @@ const userControllar = {
   deleteUser,
   getSingleUser,
   getUser,
+  loginUser,
 };
 
 export default userControllar;
