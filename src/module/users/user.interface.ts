@@ -4,5 +4,5 @@ export interface UserInterface {
   email?: string;
   number?: number | string;
   password: string;
-  type: 'user' | 'admin';
+  type?: 'user' | 'admin';
 }
