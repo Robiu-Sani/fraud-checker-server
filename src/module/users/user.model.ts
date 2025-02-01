@@ -27,12 +27,18 @@ const userSchema = new mongoose.Schema<UserInterface>(
       required: true,
       minlength: 6,
     },
+    type: {
+      type: String,
+      enum: ['user', 'admin'],
+      required: true,
+      default: 'user',
+    },
   },
   {
     timestamps: true,
   },
 );
 
-const Users = mongoose.model<UserInterface>('users', userSchema);
+const Users = mongoose.model<UserInterface>('Users', userSchema);
 
 export default Users;
