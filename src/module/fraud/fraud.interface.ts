@@ -2,6 +2,7 @@ import { ObjectId } from 'mongoose';
 
 export interface ScamReportInterface {
   user: ObjectId;
+  fraudType: 'Relationship' | 'Fraud People';
   scammerName?: string;
   scamType?: string;
   scamPlace?: string;
