@@ -1,5 +1,5 @@
 import express from 'express';
-import FraudControllar from './fraud.controllar';
+import FraudControllar from './fraud.controllar.js';
 
 const router = express.Router();
 

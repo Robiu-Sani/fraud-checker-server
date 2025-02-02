@@ -1,13 +1,12 @@
-import { UserInterface } from './user.interface';
-import Users from './user.model';
+import Users from './user.model.js';
 import bcrypt from 'bcryptjs';
 
-const createUsersIntoDB = async (payload: UserInterface) => {
+const createUsersIntoDB = async (payload) => {
   const result = await Users.create(payload);
   return result;
 };
 
-const updateUserIntoDB = async (id: string | number, info: object) => {
+const updateUserIntoDB = async (id, info) => {
   const result = await Users.findByIdAndUpdate(
     id,
     { $set: info },
@@ -17,25 +16,22 @@ const updateUserIntoDB = async (id: string | number, info: object) => {
 };
 
 const getUserIntoDB = async () => {
+  console.log('i am hit in this route');
   const result = await Users.find();
   return result;
 };
 
-const getSingleUserByIdIntoDB = async (id: string | number) => {
+const getSingleUserByIdIntoDB = async (id) => {
   const result = await Users.findById(id);
   return result;
 };
 
-const deleteSingleUserByIdIntoDB = async (id: string | number) => {
+const deleteSingleUserByIdIntoDB = async (id) => {
   const result = await Users.findByIdAndDelete(id);
   return result;
 };
 
-const loginServices = async (payload: {
-  email?: string;
-  number?: string | number;
-  password: string;
-}) => {
+const loginServices = async (payload) => {
   try {
     let user;
     if (payload.email) {

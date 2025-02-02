@@ -1,7 +1,6 @@
-import { Request, Response } from 'express';
-import ScamReportervices from './fraud.services';
+import ScamReportervices from './fraud.services.js';
 
-const createFraud = async (req: Request, res: Response) => {
+const createFraud = async (req, res) => {
   try {
     const payload = req.body;
     const data = await ScamReportervices.createScamReportIntoDB(payload);
@@ -19,7 +18,7 @@ const createFraud = async (req: Request, res: Response) => {
   }
 };
 
-const updateFraud = async (req: Request, res: Response) => {
+const updateFraud = async (req, res) => {
   try {
     const { id } = req.params;
     const payload = req.body;
@@ -38,7 +37,7 @@ const updateFraud = async (req: Request, res: Response) => {
   }
 };
 
-const deleteFraud = async (req: Request, res: Response) => {
+const deleteFraud = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await ScamReportervices.deleteSingleFraudByIdIntoDB(id);
@@ -56,7 +55,7 @@ const deleteFraud = async (req: Request, res: Response) => {
   }
 };
 
-const getSingleFraud = async (req: Request, res: Response) => {
+const getSingleFraud = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await ScamReportervices.getSingleFraudByIdIntoDB(id);
@@ -74,7 +73,7 @@ const getSingleFraud = async (req: Request, res: Response) => {
   }
 };
 
-const getFraudbyType = async (req: Request, res: Response) => {
+const getFraudbyType = async (req, res) => {
   try {
     const { fraudType } = req.params;
     const data = await ScamReportervices.getFraudByTypeIntoDB(fraudType);
@@ -92,7 +91,7 @@ const getFraudbyType = async (req: Request, res: Response) => {
   }
 };
 
-const getFraud = async (req: Request, res: Response) => {
+const getFraud = async (req, res) => {
   try {
     const data = await ScamReportervices.getFraudIntoDB();
     res.json({

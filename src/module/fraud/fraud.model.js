@@ -1,11 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
-import { ScamReportInterface } from './fraud.interface';
 
-const ScamReportSchema = new Schema<ScamReportInterface>(
+const ScamReportSchema = new Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: false,
       ref: 'Users',
     },
     fraudType: {
@@ -31,9 +30,6 @@ const ScamReportSchema = new Schema<ScamReportInterface>(
   { timestamps: true },
 );
 
-const ScamReport = mongoose.model<ScamReportInterface>(
-  'FraudReport',
-  ScamReportSchema,
-);
+const ScamReport = mongoose.model('FraudReport', ScamReportSchema);
 
 export default ScamReport;

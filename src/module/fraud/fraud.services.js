@@ -1,12 +1,11 @@
-import { ScamReportInterface } from './fraud.interface';
-import ScamReport from './fraud.model';
+import ScamReport from './fraud.model.js';
 
-const createScamReportIntoDB = async (payload: ScamReportInterface) => {
+const createScamReportIntoDB = async (payload) => {
   const result = await ScamReport.create(payload);
   return result;
 };
 
-const updateFraudIntoDB = async (id: string | number, info: object) => {
+const updateFraudIntoDB = async (id, info) => {
   const result = await ScamReport.findByIdAndUpdate(
     id,
     { $set: info },
@@ -20,19 +19,19 @@ const getFraudIntoDB = async () => {
   return result;
 };
 
-const getSingleFraudByIdIntoDB = async (id: string | number) => {
+const getSingleFraudByIdIntoDB = async (id) => {
   const result = await ScamReport.findById(id).populate('user');
   return result;
 };
 
-const getFraudByTypeIntoDB = async (fraudType: string) => {
+const getFraudByTypeIntoDB = async (fraudType) => {
   const result = await ScamReport.find({ fraudType: fraudType }).populate(
     'user',
   );
   return result;
 };
 
-const deleteSingleFraudByIdIntoDB = async (id: string | number) => {
+const deleteSingleFraudByIdIntoDB = async (id) => {
   const result = await ScamReport.findByIdAndDelete(id);
   return result;
 };

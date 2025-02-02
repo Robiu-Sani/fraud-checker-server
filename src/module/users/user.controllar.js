@@ -1,7 +1,6 @@
-import { Request, Response } from 'express';
-import userServices from './user.services';
+import userServices from './user.services.js';
 
-const createUser = async (req: Request, res: Response) => {
+const createUser = async (req, res) => {
   try {
     const payload = req.body;
     const data = await userServices.createUsersIntoDB(payload);
@@ -19,7 +18,7 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
-const loginUser = async (req: Request, res: Response) => {
+const loginUser = async (req, res) => {
   try {
     const payload = req.body;
     const data = await userServices.loginServices(payload);
@@ -37,7 +36,7 @@ const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-const updateUser = async (req: Request, res: Response) => {
+const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const payload = req.body;
@@ -56,7 +55,7 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
-const deleteUser = async (req: Request, res: Response) => {
+const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await userServices.deleteSingleUserByIdIntoDB(id);
@@ -74,7 +73,7 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-const getSingleUser = async (req: Request, res: Response) => {
+const getSingleUser = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await userServices.getSingleUserByIdIntoDB(id);
@@ -92,7 +91,7 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
-const getUser = async (req: Request, res: Response) => {
+const getUser = async (req, res) => {
   try {
     const data = await userServices.getUserIntoDB();
     res.json({
