@@ -2,20 +2,26 @@ import Users from '../user/user.model.js';
 import ScamReport from './fraud.model.js';
 
 const createScamReportIntoDB = async (payload) => {
-  try {
-    const userNumber = payload.contactInfo;
-    let user = await Users.findOne({ number: userNumber });
-    if (!user) {
-      user = await Users.create({ number: userNumber, email: '' });
-    }
+  const userNumber = payload.contactInfo;
+  let user = await Users.findOne({ number: userNumber });
 
-    const newData = { userId: user._id, ...payload };
-
-    const result = await ScamReport.create(newData);
-    return result;
-  } catch (error) {
-    console.error('Error:', error);
+  if (!user) {
+    user = await Users.create({
+      number: userNumber,
+      email: `${userNumber}@scambd.com`,
+    });
   }
+
+  console.log(user);
+
+  const newData = {
+    userId: user._id,
+    ...payload,
+  };
+
+  console.log(newData);
+  const result = await ScamReport.create(newData);
+  return result;
 };
 
 const updateFraudIntoDB = async (id, info) => {

@@ -10,8 +10,6 @@ const createFraud = async (req, res) => {
       data,
     });
   } catch (error) {
-    // console.log(error);
-
     res.json({
       status: false,
       message: 'Fraud is not created successfully',
