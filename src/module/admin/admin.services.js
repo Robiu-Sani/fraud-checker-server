@@ -1,17 +1,17 @@
-import Users from './user.model.js';
+import Admins from './admin.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const createUsersIntoDB = async (payload) => {
-  const result = await Users.create(payload);
+const createAdminIntoDB = async (payload) => {
+  const result = await Admins.create(payload);
   return result;
 };
 
-const updateUserIntoDB = async (id, info) => {
-  const result = await Users.findByIdAndUpdate(
+const updateAdminIntoDB = async (id, info) => {
+  const result = await Admins.findByIdAndUpdate(
     id,
     { $set: info },
     { new: true },
@@ -19,28 +19,28 @@ const updateUserIntoDB = async (id, info) => {
   return result;
 };
 
-const getUserIntoDB = async () => {
+const getAdminIntoDB = async () => {
   console.log('i am hit in this route');
-  const result = await Users.find();
+  const result = await Admins.find();
   return result;
 };
 
-const getSingleUserByIdIntoDB = async (id) => {
-  const result = await Users.findById(id);
+const getSingleAdminByIdIntoDB = async (id) => {
+  const result = await Admins.findById(id);
   return result;
 };
 
-const deleteSingleUserByIdIntoDB = async (id) => {
-  const result = await Users.findByIdAndDelete(id);
+const deleteSingleAdminByIdIntoDB = async (id) => {
+  const result = await Admins.findByIdAndDelete(id);
   return result;
 };
 
-const loginServices = async (payload) => {
+const adminLoginServices = async (payload) => {
   let user;
   if (payload.email) {
-    user = await Users.findOne({ email: payload.email });
+    user = await Admins.findOne({ email: payload.email });
   } else if (payload.number) {
-    user = await Users.findOne({ number: payload.number });
+    user = await Admins.findOne({ number: payload.number });
   }
 
   if (!user) {
@@ -69,12 +69,12 @@ const loginServices = async (payload) => {
   return { status: true, message: 'Login successful', data: userInfo };
 };
 
-const userServices = {
-  createUsersIntoDB,
-  updateUserIntoDB,
-  getUserIntoDB,
-  getSingleUserByIdIntoDB,
-  deleteSingleUserByIdIntoDB,
-  loginServices,
+const adminServices = {
+  createAdminIntoDB,
+  updateAdminIntoDB,
+  getAdminIntoDB,
+  getSingleAdminByIdIntoDB,
+  deleteSingleAdminByIdIntoDB,
+  adminLoginServices,
 };
-export default userServices;
+export default adminServices;

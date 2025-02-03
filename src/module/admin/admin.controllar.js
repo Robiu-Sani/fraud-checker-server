@@ -1,9 +1,9 @@
-import userServices from './user.services.js';
+import adminServices from './admin.services.js';
 
-const createUser = async (req, res) => {
+const createAdmin = async (req, res) => {
   try {
     const payload = req.body;
-    const data = await userServices.createUsersIntoDB(payload);
+    const data = await adminServices.createAdminIntoDB(payload);
     res.json({
       status: true,
       message: 'User created successfully',
@@ -18,10 +18,10 @@ const createUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
+const loginAdmin = async (req, res) => {
   try {
     const payload = req.body;
-    const data = await userServices.loginServices(payload);
+    const data = await adminServices.adminLoginServices(payload);
     res.json({
       status: true,
       message: 'User login successfully',
@@ -36,11 +36,11 @@ const loginUser = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+const updateAdmin = async (req, res) => {
   try {
     const { id } = req.params;
     const payload = req.body;
-    const data = await userServices.updateUserIntoDB(id, payload);
+    const data = await adminServices.updateAdminIntoDB(id, payload);
     res.json({
       status: true,
       message: 'User updated successfully',
@@ -55,10 +55,10 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteAdmin = async (req, res) => {
   try {
     const { id } = req.params;
-    const data = await userServices.deleteSingleUserByIdIntoDB(id);
+    const data = await adminServices.deleteSingleAdminByIdIntoDB(id);
     res.json({
       status: true,
       message: 'User deleted successfully',
@@ -73,10 +73,10 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const getSingleUser = async (req, res) => {
+const getSingleAdmin = async (req, res) => {
   try {
     const { id } = req.params;
-    const data = await userServices.getSingleUserByIdIntoDB(id);
+    const data = await adminServices.getSingleAdminByIdIntoDB(id);
     res.json({
       status: true,
       message: 'User get successfully',
@@ -91,9 +91,9 @@ const getSingleUser = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+const getAdmin = async (req, res) => {
   try {
-    const data = await userServices.getUserIntoDB();
+    const data = await adminServices.getAdminIntoDB();
     res.json({
       status: true,
       message: 'User get successfully',
@@ -108,13 +108,13 @@ const getUser = async (req, res) => {
   }
 };
 
-const userControllar = {
-  createUser,
-  updateUser,
-  deleteUser,
-  getSingleUser,
-  getUser,
-  loginUser,
+const adminControllar = {
+  createAdmin,
+  updateAdmin,
+  deleteAdmin,
+  getSingleAdmin,
+  getAdmin,
+  loginAdmin,
 };
 
-export default userControllar;
+export default adminControllar;
