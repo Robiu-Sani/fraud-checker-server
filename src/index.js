@@ -27,10 +27,6 @@ async function main() {
   });
 }
 
-// app.listen(5000, () => {
-//   console.log(config.port);
-// });
-
 app.use('/', (req, res) => {
   res.send('Fraud checker server is running');
 });
