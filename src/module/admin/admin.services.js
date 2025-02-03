@@ -20,7 +20,6 @@ const updateAdminIntoDB = async (id, info) => {
 };
 
 const getAdminIntoDB = async () => {
-  console.log('i am hit in this route');
   const result = await Admins.find();
   return result;
 };

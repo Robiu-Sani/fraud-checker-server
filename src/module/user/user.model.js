@@ -8,6 +8,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const User = mongoose.model('Users', userSchema);
+const Users = mongoose.model('Users', userSchema);
 
-export default User;
+export default Users;

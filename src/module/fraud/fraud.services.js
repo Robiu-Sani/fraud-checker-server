@@ -1,8 +1,8 @@
 import ScamReport from './fraud.model.js';
 
 const createScamReportIntoDB = async (payload) => {
-  const result = await ScamReport.create(payload);
-  return result;
+  // const result = await ScamReport.create(payload);
+  return payload;
 };
 
 const updateFraudIntoDB = async (id, info) => {
@@ -15,19 +15,17 @@ const updateFraudIntoDB = async (id, info) => {
 };
 
 const getFraudIntoDB = async () => {
-  const result = await ScamReport.find().populate('user');
+  const result = await ScamReport.find();
   return result;
 };
 
 const getSingleFraudByIdIntoDB = async (id) => {
-  const result = await ScamReport.findById(id).populate('user');
+  const result = await ScamReport.findById(id);
   return result;
 };
 
 const getFraudByTypeIntoDB = async (fraudType) => {
-  const result = await ScamReport.find({ fraudType: fraudType }).populate(
-    'user',
-  );
+  const result = await ScamReport.find({ fraudType: fraudType });
   return result;
 };
 
