@@ -3,7 +3,6 @@ import ScamReportervices from './fraud.services.js';
 const createFraud = async (req, res) => {
   try {
     const payload = req.body;
-    console.log(payload);
     const data = await ScamReportervices.createScamReportIntoDB(payload);
     res.json({
       status: true,
@@ -11,6 +10,8 @@ const createFraud = async (req, res) => {
       data,
     });
   } catch (error) {
+    // console.log(error);
+
     res.json({
       status: false,
       message: 'Fraud is not created successfully',

@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const ScamReportSchema = new Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
       ref: 'Users',
@@ -31,5 +31,4 @@ const ScamReportSchema = new Schema(
 );
 
 const ScamReport = mongoose.model('FraudReport', ScamReportSchema);
-
 export default ScamReport;

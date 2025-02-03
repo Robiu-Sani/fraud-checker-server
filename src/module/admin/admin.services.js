@@ -54,15 +54,15 @@ const adminLoginServices = async (payload) => {
     return { status: false, message: 'Incorrect password.' };
   }
 
-  const jwtPayload = {
-    id: user._id,
-    role: user.type,
-    email: user.email,
-  };
+  // const jwtPayload = {
+  //   id: user._id,
+  //   role: user.type,
+  //   email: user.email,
+  // };
 
-  const eccessToken = jwt.sign(jwtPayload, process.env.SECRET_TOKEN, {
-    expiresIn: 60 * 60,
-  });
+  // const eccessToken = jwt.sign(jwtPayload, process.env.SECRET_TOKEN, {
+  //   expiresIn: 60 * 60,
+  // });
 
   const userInfo = { ...user.toObject(), password: undefined };
   return { status: true, message: 'Login successful', data: userInfo };
