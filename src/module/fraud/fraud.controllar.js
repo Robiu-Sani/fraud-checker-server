@@ -57,18 +57,20 @@ const deleteFraud = async (req, res) => {
 
 const getAcceptedFraud = async (req, res) => {
   try {
-    const { number } = req.params;
-    const data = await ScamReportervices.getAcceptedFraudIntoDB();
+    const { cetagory } = req.query;
+    console.log(cetagory);
+    const data = await ScamReportervices.getAcceptedFraudIntoDB(cetagory);
+
     res.json({
       status: true,
-      message: 'Fraud get successfully',
+      message: 'Fraud retrieved successfully',
       data,
     });
   } catch (error) {
-    res.json({
+    res.status(500).json({
       status: false,
-      message: 'Fraud is not get successfully',
-      error,
+      message: 'Failed to retrieve fraud data',
+      error: error,
     });
   }
 };

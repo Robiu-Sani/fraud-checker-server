@@ -39,10 +39,15 @@ const getFraudIntoDB = async () => {
   return result;
 };
 
-const getAcceptedFraudIntoDB = async () => {
-  const result = await ScamReport.find({ reportStatus: 'Accepted' }).populate(
-    'userId',
-  );
+const getAcceptedFraudIntoDB = async (category) => {
+  const query = { reportStatus: 'Accepted' };
+
+  if (category) {
+    query.fraudType = category;
+  }
+  console.log(category);
+
+  const result = await ScamReport.find(query).populate('userId');
   return result;
 };
 
