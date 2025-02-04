@@ -58,7 +58,6 @@ const deleteFraud = async (req, res) => {
 const getAcceptedFraud = async (req, res) => {
   try {
     const { cetagory } = req.query;
-    console.log(cetagory);
     const data = await ScamReportervices.getAcceptedFraudIntoDB(cetagory);
 
     res.json({
