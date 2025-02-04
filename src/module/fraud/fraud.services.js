@@ -39,8 +39,20 @@ const getFraudIntoDB = async () => {
   return result;
 };
 
+const getAcceptedFraudIntoDB = async () => {
+  const result = await ScamReport.find({ reportStatus: 'Accepted' }).populate(
+    'userId',
+  );
+  return result;
+};
+
 const getSingleFraudByIdIntoDB = async (id) => {
   const result = await ScamReport.findById(id).populate('userId');
+  return result;
+};
+
+const getFraudByNumberDB = async (number) => {
+  const result = await ScamReport.find({ number: number }).populate('userId');
   return result;
 };
 
@@ -63,5 +75,7 @@ const ScamReportervices = {
   getSingleFraudByIdIntoDB,
   deleteSingleFraudByIdIntoDB,
   getFraudByTypeIntoDB,
+  getFraudByNumberDB,
+  getAcceptedFraudIntoDB,
 };
 export default ScamReportervices;
