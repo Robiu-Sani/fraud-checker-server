@@ -15,16 +15,16 @@ const ScamReportSchema = new Schema(
     scammerName: { type: String },
     scamType: { type: String },
     scamPlace: { type: String },
-    bankDetails: { type: String },
+    bankDetails: { type: String }, //
     paymentPlatform: { type: String },
     scamAmount: { type: Schema.Types.Mixed },
-    dateTime: { type: String },
+    dateTime: { type: String }, //
     description: { type: String },
-    contactInfo: { type: String },
+    number: { type: String },
     scammerProfile: { type: String },
     reportStatus: { type: String, default: 'Pending' },
     evidence: [{ type: String }],
-    additionalEvidence: [{ type: String }],
+    additionalEvidence: [{ type: String }], //
     node: [{ type: String }],
   },
   { timestamps: true },

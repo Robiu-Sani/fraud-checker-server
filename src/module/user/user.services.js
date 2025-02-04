@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import Users from './user.model.js';
+import ScamReport from '../fraud/fraud.model.js';
 
 dotenv.config();
 
@@ -20,8 +21,15 @@ const updateUserIntoDB = async (id, info) => {
 };
 
 const getUserIntoDB = async () => {
-  const result = await Users.find();
-  return result;
+  const users = await Users.find();
+  let reports = [];
+
+  for (const user of users) {
+    const userReports = await ScamReport.find({ userId: user._id });
+    reports.push({ user, reports: userReports });
+  }
+
+  return reports;
 };
 
 const getSingleUserByIdIntoDB = async (id) => {

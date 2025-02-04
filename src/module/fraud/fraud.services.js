@@ -2,7 +2,11 @@ import Users from '../user/user.model.js';
 import ScamReport from './fraud.model.js';
 
 const createScamReportIntoDB = async (payload) => {
-  const userNumber = payload.contactInfo;
+  if (!payload.number) {
+    throw new Error('without number fraud will not created');
+  }
+
+  const userNumber = payload.number;
   let user = await Users.findOne({ number: userNumber });
 
   if (!user) {
@@ -12,14 +16,11 @@ const createScamReportIntoDB = async (payload) => {
     });
   }
 
-  console.log(user);
-
   const newData = {
     userId: user._id,
     ...payload,
   };
 
-  console.log(newData);
   const result = await ScamReport.create(newData);
   return result;
 };
