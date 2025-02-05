@@ -1,4 +1,4 @@
-import UserServices from './User.services.js';
+import UserServices from './user.services.js';
 
 const createUser = async (req, res) => {
   try {
@@ -21,7 +21,8 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const payload = req.body;
-    const data = await UserServices.UserLoginServices(payload);
+    const data = await UserServices.userLoginServices(payload);
+    console.log(data);
     res.json({
       status: true,
       message: 'User login successfully',

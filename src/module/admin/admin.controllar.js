@@ -91,6 +91,15 @@ const getSingleAdmin = async (req, res) => {
   }
 };
 
+const dashboard = async (req, res) => {
+  try {
+    const data = await adminServices.dashboardOverview();
+    res.json(data);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
 const getAdmin = async (req, res) => {
   try {
     const data = await adminServices.getAdminIntoDB();
@@ -115,6 +124,7 @@ const adminControllar = {
   getSingleAdmin,
   getAdmin,
   loginAdmin,
+  dashboard,
 };
 
 export default adminControllar;

@@ -33,7 +33,12 @@ const getUserIntoDB = async () => {
 };
 
 const getSingleUserByIdIntoDB = async (id) => {
-  const result = await Users.findById(id);
+  const user = await Users.findById(id);
+  const reports = await ScamReport.find({ userId: id });
+  const result = {
+    user,
+    reports,
+  };
   return result;
 };
 
@@ -44,36 +49,22 @@ const deleteSingleUserByIdIntoDB = async (id) => {
 
 const userLoginServices = async (payload) => {
   let user;
-  if (payload.email) {
-    user = await Users.findOne({ email: payload.email });
-  } else if (payload.number) {
+  if (payload.number) {
     user = await Users.findOne({ number: payload.number });
   }
 
   if (!user) {
     return {
       status: false,
-      message: 'No user found with this email or number.',
+      message: 'No user found with this number.',
     };
   }
-
-  const isPasswordValid = await bcrypt.compare(payload.password, user.password);
-  if (!isPasswordValid) {
+  console.log(user.password, payload.password);
+  if (user.password != payload.password) {
     return { status: false, message: 'Incorrect password.' };
   }
 
-  const jwtPayload = {
-    id: user._id,
-    role: user.type,
-    email: user.email,
-  };
-
-  const eccessToken = jwt.sign(jwtPayload, process.env.SECRET_TOKEN, {
-    expiresIn: 60 * 60,
-  });
-
-  const userInfo = { ...user.toObject(), password: undefined };
-  return { status: true, message: 'Login successful', data: userInfo };
+  return { status: true, message: 'Login successful', data: user };
 };
 
 const UserServices = {

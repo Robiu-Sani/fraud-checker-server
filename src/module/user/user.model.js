@@ -1,10 +1,17 @@
 import mongoose from 'mongoose';
 
+const generateRandomPassword = () => {
+  return Math.floor(10000000 + Math.random() * 90000000).toString();
+};
+
 const userSchema = new mongoose.Schema(
   {
     number: { type: Number, required: true },
     email: { type: String, sparse: true },
-    password: { type: mongoose.Schema.Types.Mixed, default: 123456 },
+    password: {
+      type: mongoose.Schema.Types.Mixed,
+      default: generateRandomPassword,
+    },
   },
   { timestamps: true },
 );
