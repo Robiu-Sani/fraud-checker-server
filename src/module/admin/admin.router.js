@@ -6,6 +6,7 @@ const router = express.Router();
 router.post('/create', adminControllar.createAdmin);
 router.post('/login', adminControllar.loginAdmin);
 router.get('/', adminControllar.getAdmin);
+router.get('/dashboard', adminControllar.dashboard);
 router.get('/single-admin/:id', adminControllar.getSingleAdmin);
 router.patch('/update-admin-byPatch/:id', adminControllar.updateAdmin);
 router.put('/update-admin-byPut/:id', adminControllar.updateAdmin);

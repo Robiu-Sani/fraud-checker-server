@@ -2,6 +2,9 @@ import Admins from './admin.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import Users from '../user/user.model.js';
+import ScamReport from '../fraud/fraud.model.js';
+import Contact from '../contact/contact.model.js';
 
 dotenv.config();
 
@@ -68,6 +71,20 @@ const adminLoginServices = async (payload) => {
   return { status: true, message: 'Login successful', data: userInfo };
 };
 
+const dashboardOverview = async () => {
+  const user = await Users.countDocuments();
+  const admin = await Admins.countDocuments();
+  const reports = await ScamReport.countDocuments();
+  const contact = await Contact.countDocuments();
+  const result = {
+    user,
+    admin,
+    reports,
+    contact,
+  };
+  return result;
+};
+
 const adminServices = {
   createAdminIntoDB,
   updateAdminIntoDB,
@@ -75,5 +92,6 @@ const adminServices = {
   getSingleAdminByIdIntoDB,
   deleteSingleAdminByIdIntoDB,
   adminLoginServices,
+  dashboardOverview,
 };
 export default adminServices;
