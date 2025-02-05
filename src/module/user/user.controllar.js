@@ -37,6 +37,26 @@ const loginUser = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const payload = req.body;
+    const data = await UserServices.createUserIntoDB(id, payload);
+    console.log(data);
+    res.json({
+      status: true,
+      message: 'Password Changed successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Password is not  Changed successfully',
+      error,
+    });
+  }
+};
+
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -116,6 +136,7 @@ const UserControllar = {
   getSingleUser,
   getUser,
   loginUser,
+  changePassword,
 };
 
 export default UserControllar;

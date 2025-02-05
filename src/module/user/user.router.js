@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/create', UserControllar.createUser);
 router.post('/login', UserControllar.loginUser);
+router.post('/change-password/:id', UserControllar.changePassword);
 router.get('/', UserControllar.getUser);
 router.get('/single-user/:id', UserControllar.getSingleUser);
 router.patch('/update-user-byPatch/:id', UserControllar.updateUser);

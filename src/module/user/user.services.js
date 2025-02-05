@@ -67,8 +67,22 @@ const userLoginServices = async (payload) => {
   return { status: true, message: 'Login successful', data: user };
 };
 
+const changePAsswordDB = async (id, payload) => {
+  const user = await Users.findById(id);
+  if (user.password != currentPassword) {
+    throw new Error('current password is not match');
+  }
+  const newData = await Users.findByIdAndUpdate(
+    id,
+    { password: payload.newPassword },
+    { new: true },
+  );
+  return newData;
+};
+
 const UserServices = {
   createUserIntoDB,
+  changePAsswordDB,
   updateUserIntoDB,
   getUserIntoDB,
   getSingleUserByIdIntoDB,
