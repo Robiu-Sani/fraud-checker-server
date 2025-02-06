@@ -18,6 +18,24 @@ const createContact = async (req, res) => {
   }
 };
 
+const getContactInto = async (req, res) => {
+  try {
+    const data = await contactServices.getContactIntoDB();
+    res.json({
+      status: true,
+      message: 'contact get successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'contact is not get successfully',
+      error,
+    });
+  }
+};
+
 export const contactControllar = {
   createContact,
+  getContactInto,
 };
