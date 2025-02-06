@@ -6,6 +6,7 @@ import { fraud_router } from './module/fraud/fraud.router.js';
 import dotenv from 'dotenv';
 import { user_router } from './module/user/user.router.js';
 import { contact_router } from './module/contact/contact.router.js';
+import { verify_route } from './module/verifiedCompany/verifiedCompany.router.js';
 // import config from './config/index';
 
 const app = express();
@@ -17,6 +18,7 @@ app.use('/api/v1/admin', admin_router);
 app.use('/api/v1/user', user_router);
 app.use('/api/v1/contact', contact_router);
 app.use('/api/v1/fraud', fraud_router);
+app.use('/api/v1/verify', verify_route);
 
 main();
 
