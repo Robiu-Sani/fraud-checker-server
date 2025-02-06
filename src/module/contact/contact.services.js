@@ -1,4 +1,4 @@
-import Contact from './contact.model';
+import Contact from './contact.model.js';
 
 const createContactIntoDB = async (payload) => {
   const result = await Contact.create(payload);

@@ -1,16 +1,16 @@
-import { contactServices } from './contact.services';
+import { contactServices } from './contact.services.js';
 
 const createContact = async (req, res) => {
   try {
     const payload = req.body;
     const data = await contactServices.createContactIntoDB(payload);
-    res.json({
+    res.status(200).json({
       status: true,
       message: 'contact created successfully',
       data,
     });
   } catch (error) {
-    res.json({
+    res.status(404).json({
       status: false,
       message: 'contact is not created successfully',
       error,
