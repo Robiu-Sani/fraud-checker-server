@@ -10,6 +10,11 @@ const getAllCompanyVerifications = async () => {
   return data;
 };
 
+const getAllVerifiedCompany = async () => {
+  const data = await CompanyVerification.find({ status: 'Verified' });
+  return data;
+};
+
 const getSingleCompanyVerification = async (id) => {
   const data = await CompanyVerification.findById(id);
   return data;
@@ -33,6 +38,7 @@ const Companyservices = {
   getSingleCompanyVerification,
   updateCompanyVerification,
   deleteCompanyVerification,
+  getAllVerifiedCompany,
 };
 
 export default Companyservices;
