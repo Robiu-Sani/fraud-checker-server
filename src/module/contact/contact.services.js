@@ -10,7 +10,13 @@ const getContactIntoDB = async () => {
   return result;
 };
 
+const deleteContactIntoDB = async (id) => {
+  const result = await Contact.findOneAndDelete(id);
+  return result;
+};
+
 export const contactServices = {
   createContactIntoDB,
   getContactIntoDB,
+  deleteContactIntoDB,
 };
