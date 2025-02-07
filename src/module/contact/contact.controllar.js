@@ -35,7 +35,26 @@ const getContactInto = async (req, res) => {
   }
 };
 
+const deleteContactInto = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await contactServices.deleteContactIntoDB(id);
+    res.json({
+      status: true,
+      message: 'contact get successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'contact is not get successfully',
+      error,
+    });
+  }
+};
+
 export const contactControllar = {
   createContact,
   getContactInto,
+  deleteContactInto,
 };

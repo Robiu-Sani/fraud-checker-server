@@ -35,6 +35,23 @@ const getAllCompanyVerifications = async (req, res) => {
   }
 };
 
+const getAllVerifiedCompanys = async (req, res) => {
+  try {
+    const data = await Companyservices.getAllVerifiedCompany();
+    res.status(200).json({
+      status: true,
+      message: 'Company verifications retrieved successfully',
+      data,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: false,
+      message: 'Failed to retrieve company verifications',
+      error: error,
+    });
+  }
+};
+
 const getSingleCompanyVerification = async (req, res) => {
   try {
     const { id } = req.params;
@@ -114,6 +131,7 @@ const VerifyControllar = {
   getSingleCompanyVerification,
   updateCompanyVerification,
   deleteCompanyVerification,
+  getAllVerifiedCompanys,
 };
 
 export default VerifyControllar;

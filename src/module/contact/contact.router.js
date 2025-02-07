@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post('/create', contactControllar.createContact);
 router.get('/', contactControllar.getContactInto);
+router.delete('/delete/:id', contactControllar.deleteContactInto);
 
 export const contact_router = router;
