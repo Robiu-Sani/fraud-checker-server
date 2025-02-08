@@ -130,17 +130,20 @@ const getFraudbyType = async (req, res) => {
 
 const getFraud = async (req, res) => {
   try {
-    const data = await ScamReportervices.getFraudIntoDB();
-    res.json({
+    const { scamType, search } = req.query;
+    const data = await ScamReportervices.getFraudIntoDB(scamType, search);
+
+    res.status(200).json({
       status: true,
-      message: 'Fraud get successfully',
+      message: 'Fraud reports fetched successfully',
       data,
     });
   } catch (error) {
-    res.json({
+    console.error('Error fetching fraud reports:', error);
+    res.status(500).json({
       status: false,
-      message: 'Fraud is not get successfully',
-      error,
+      message: 'Failed to fetch fraud reports',
+      error: error.message,
     });
   }
 };

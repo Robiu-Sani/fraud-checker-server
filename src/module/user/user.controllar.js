@@ -22,7 +22,6 @@ const loginUser = async (req, res) => {
   try {
     const payload = req.body;
     const data = await UserServices.userLoginServices(payload);
-    console.log(data);
     res.json({
       status: true,
       message: 'User login successfully',
@@ -41,8 +40,7 @@ const changePassword = async (req, res) => {
   try {
     const { id } = req.params;
     const payload = req.body;
-    const data = await UserServices.createUserIntoDB(id, payload);
-    console.log(data);
+    const data = await UserServices.changePAsswordDB(id, payload);
     res.json({
       status: true,
       message: 'Password Changed successfully',

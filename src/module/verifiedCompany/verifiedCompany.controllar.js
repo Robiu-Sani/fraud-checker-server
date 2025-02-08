@@ -4,12 +4,16 @@ const createCompanyVerification = async (req, res) => {
   try {
     const payload = req.body;
     const data = await Companyservices.createCompanyVerification(payload);
+    console.log(data);
+
     res.status(200).json({
       status: true,
       message: 'Company verification created successfully',
       data,
     });
   } catch (error) {
+    console.log(error);
+
     res.status(400).json({
       status: false,
       message: 'Failed to create company verification',

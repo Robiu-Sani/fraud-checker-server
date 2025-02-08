@@ -69,7 +69,7 @@ const userLoginServices = async (payload) => {
 
 const changePAsswordDB = async (id, payload) => {
   const user = await Users.findById(id);
-  if (user.password != currentPassword) {
+  if (user.password != payload.currentPassword) {
     throw new Error('current password is not match');
   }
   const newData = await Users.findByIdAndUpdate(
