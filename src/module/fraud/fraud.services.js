@@ -34,13 +34,30 @@ const updateFraudIntoDB = async (id, info) => {
   return result;
 };
 
-const getFraudIntoDB = async () => {
-  const result = await ScamReport.find().populate('userId');
+const getFraudIntoDB = async (scamType, search) => {
+  let filter = {};
+
+  if (scamType) {
+    filter.scamType = scamType;
+  }
+
+  if (search) {
+    filter.$or = [
+      { title: { $regex: search, $options: 'i' } },
+      { description: { $regex: search, $options: 'i' } },
+    ];
+  }
+  const result = await ScamReport.find(filter)
+    .populate('userId')
+    .sort({ _id: -1 })
+    .limit(140);
+
   return result;
 };
 
 const getAcceptedFraudIntoDB = async (category) => {
-  const query = { reportStatus: 'Accepted' };
+  // const query = { reportStatus: 'Accepted' };
+  const query = {};
 
   if (category) {
     query.fraudType = category;
