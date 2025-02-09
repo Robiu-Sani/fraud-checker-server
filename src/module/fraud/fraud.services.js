@@ -7,11 +7,13 @@ const createScamReportIntoDB = async (payload) => {
   }
 
   const userNumber = payload.number;
+  const userName = payload.name;
   let user = await Users.findOne({ number: userNumber });
 
   if (!user) {
     user = await Users.create({
       number: userNumber,
+      name: userName,
       email: `${userNumber}@scambd.com`,
     });
   }

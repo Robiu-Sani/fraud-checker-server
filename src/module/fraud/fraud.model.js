@@ -15,6 +15,7 @@ const ScamReportSchema = new Schema(
     scammerName: { type: String, required: false },
     relationType: { type: String, required: false },
     witness: { type: String, required: false },
+    name: { type: String, required: false },
     engagedWith: { type: String, required: false },
     scamType: { type: String, required: false },
     scamPlace: { type: String, required: false },

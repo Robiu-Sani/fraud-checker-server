@@ -7,6 +7,7 @@ const generateRandomPassword = () => {
 const userSchema = new mongoose.Schema(
   {
     number: { type: Number, required: true },
+    name: { type: String, required: false },
     email: { type: String, sparse: true },
     password: {
       type: mongoose.Schema.Types.Mixed,
