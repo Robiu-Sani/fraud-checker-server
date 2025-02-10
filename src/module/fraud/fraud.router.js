@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/create', FraudControllar.createFraud);
 router.get('/', FraudControllar.getFraud);
 router.get('/accept', FraudControllar.getAcceptedFraud);
-router.get('/fraud-type/:fraudType', FraudControllar.getSingleFraud);
+router.get('/fraud-type/:fraudType', FraudControllar.getFraudbyType);
 router.get('/single-fraud/:id', FraudControllar.getSingleFraud);
 router.get('/number/:number', FraudControllar.getFraudbyNumber);
 router.patch('/update-fraud-byPatch/:id', FraudControllar.updateFraud);

@@ -130,8 +130,12 @@ const getFraudbyType = async (req, res) => {
 
 const getFraud = async (req, res) => {
   try {
-    const { scamType, search } = req.query;
-    const data = await ScamReportervices.getFraudIntoDB(scamType, search);
+    const { cetagory, scamType, search } = req.query;
+    const data = await ScamReportervices.getFraudIntoDB(
+      scamType,
+      search,
+      cetagory,
+    );
 
     res.status(200).json({
       status: true,

@@ -36,16 +36,25 @@ const updateFraudIntoDB = async (id, info) => {
   return result;
 };
 
-const getFraudIntoDB = async (scamType, search) => {
+const getFraudIntoDB = async (scamType, search, cetagory) => {
   let filter = {};
 
   if (scamType) {
     filter.scamType = scamType;
   }
 
+  if (cetagory) {
+    filter.fraudType = cetagory;
+  }
+
   if (search) {
     filter.$or = [
-      { title: { $regex: search, $options: 'i' } },
+      { fraudType: { $regex: search, $options: 'i' } },
+      { scammerName: { $regex: search, $options: 'i' } },
+      { relationType: { $regex: search, $options: 'i' } },
+      { scamPlace: { $regex: search, $options: 'i' } },
+      { scammerProfile: { $regex: search, $options: 'i' } },
+      { number: { $regex: search, $options: 'i' } },
       { description: { $regex: search, $options: 'i' } },
     ];
   }
