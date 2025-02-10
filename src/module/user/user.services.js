@@ -7,6 +7,11 @@ import ScamReport from '../fraud/fraud.model.js';
 dotenv.config();
 
 const createUserIntoDB = async (payload) => {
+  const user = await Users.findOne({ number: payload.number });
+  if (user) {
+    throw new Error('User already exists with this number');
+  }
+
   const result = await Users.create(payload);
   return result;
 };

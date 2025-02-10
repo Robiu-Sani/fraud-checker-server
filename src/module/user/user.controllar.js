@@ -3,6 +3,7 @@ import UserServices from './user.services.js';
 const createUser = async (req, res) => {
   try {
     const payload = req.body;
+    // console.log(payload);
     const data = await UserServices.createUserIntoDB(payload);
     res.json({
       status: true,
